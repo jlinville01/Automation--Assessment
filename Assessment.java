@@ -69,12 +69,10 @@ public class Assessment extends Site_Methods
 	}
 	
 	/**
-	 * Deletes and creates six new Persona accounts.
-	 * Script adds 1-6 for each Persona account. 
+	 * Select an answer and clicks next to proceed to the next question.
 	 *
-	 * @param email		the mailbox for the accounts to be reset
-	 * @param endEmail	the domain name for the accounts to be reset
-	 * @param clientID	the client id for the account to be reset
+	 * @param imageA2	the question response
+	 * @param next2		button that proceeds to next question
 	 */
 	public void selectAnswer(WebElement imageA2, WebElement next2) throws Exception 
 	{

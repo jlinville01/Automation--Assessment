@@ -84,7 +84,6 @@ public abstract class StandOut
 		this.props = pr;
 		this.driver = wd;
 		this.baseUrl = url;
-		
 		this.wait = new WebDriverWait(driver, 30);
 	}
 	

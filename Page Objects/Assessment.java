@@ -1,7 +1,3 @@
-/*
- * Page Object for the Assessment Page
- */
-
 package page_objects;
 
 import org.openqa.selenium.WebDriver;
@@ -11,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.PageFactory;
 
-public class Assessment extends Site_Methods
+public class Assessment extends Page_Methods
 {
 	private WebDriverWait wait;
 	
@@ -30,6 +26,12 @@ public class Assessment extends Site_Methods
 	@FindBy(id = "continue")
 	private WebElement continueButton;
 	
+	/**
+	 * Instantiates the Assessment page object.
+	 * 
+	 * @param driver	the driver for this class.
+	 * @throws Exception
+	 */
 	public Assessment(WebDriver driver) throws Exception 
 	{
 		PageFactory.initElements(driver, this);
@@ -40,14 +42,14 @@ public class Assessment extends Site_Methods
 	 * Completes the new user Assessment by selecting,
 	 * all A's except for question 19.
 	 */
-	public void completeAssessment() throws Exception
+	public void completeAssessment()
 	{
-		try 
+		try
 		{
 			wait.until(ExpectedConditions.elementToBeClickable(btnAssessment));
 			btnAssessment.click();
-
-			for (int i = 1; i < 35; i++) 
+			
+			for (int i = 1; i < 35; i++)
 			{
 				if (i != 19)
 				{
@@ -57,12 +59,12 @@ public class Assessment extends Site_Methods
 			
 				selectAnswer(imageB, next);
 			}
-
+			
 			wait.until(ExpectedConditions.elementToBeClickable(continueButton));
 			continueButton.click();
 			wait.until(jQueryAJAXCallsHaveCompleted());
-		} 
-		catch (Exception exc) 
+		}
+		catch (Exception exc)
 		{
 			exc.printStackTrace();
 		}
@@ -71,15 +73,22 @@ public class Assessment extends Site_Methods
 	/**
 	 * Select an answer and clicks next to proceed to the next question.
 	 *
-	 * @param imageA2	the question response
-	 * @param next2		button that proceeds to next question
+	 * @param imageA2	the question response.
+	 * @param next2		button that proceeds to next question.
 	 */
-	public void selectAnswer(WebElement imageA2, WebElement next2) throws Exception 
+	public void selectAnswer(WebElement imageA2, WebElement next2)
 	{
-		wait.until(ExpectedConditions.visibilityOf(imageA2));
-		imageA2.click();
-		wait.until(ExpectedConditions.elementToBeClickable(next2));
-		next2.click();
-		wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(imageA2)));
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOf(imageA2));
+			imageA2.click();
+			wait.until(ExpectedConditions.elementToBeClickable(next2));
+			next2.click();
+			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(imageA2)));
+		}
+		catch (Exception exc) 
+		{
+			exc.printStackTrace();
+		}
 	}
 }

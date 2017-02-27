@@ -1,37 +1,24 @@
-/*
- * Database methods for site Assessment
- */
-
 package database;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import page_objects.StandOut;
+import page_objects.AbstractPageObject;
 
-public class DB_Assessment extends StandOut
+public class DB_Assessment extends AbstractPageObject
 {
 	private Statement stmt;
+	private ResultSet result = null;
 	
-	public void runTest() throws Exception {};
-	public void tearDown() throws Exception {};
-	
-	/**
-	 * Instantiates the DB_Assessment page object.
-	 * 
-	 * @param driver	the driver for this class.
-	 * @param connection	the db connection for this class.
-	 * @throws Exception
-	 */
 	public DB_Assessment(WebDriver driver, java.sql.Connection connection) throws Exception 
 	{
-		PageFactory.initElements(driver, this);
-		this.wait = new WebDriverWait(driver, 30);
-		this.con = connection;
+		super(driver, connection);
 	}
 	
 	/**
@@ -48,20 +35,20 @@ public class DB_Assessment extends StandOut
 					+ email + "';";
 			result = stmt.executeQuery(validate);
 			this.con.commit();
-
+			
 			while (result.next())
 			{
 				// Fetch values from DB to compare
 				String question_id = result.getString("question_id");
 				String order_label = result.getString("order_label");
-
-				if (Integer.parseInt(question_id) = 14)
+				
+				if (Integer.parseInt(question_id) != 14)
 				{
-					assertThat(order_label, is("B"));
+					assertThat(order_label, is("A"));
 				}
 				else
 				{
-					assertThat(order_label, is("A"));
+					assertThat(order_label, is("B"));
 				}
 			}
 			result.close();

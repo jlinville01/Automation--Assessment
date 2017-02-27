@@ -4,16 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
-public class Assessment extends Page_Methods
+public class Assessment extends AbstractPageObject
 {
-	private WebDriverWait wait;
-	
 	@FindBy(id = "btnAssessment")
 	private WebElement btnAssessment;
 
+	@FindBy(id = "chooselanguage")
+	private WebElement languageDropDown;
+	
 	@FindBy(id = "imageA")
 	private WebElement imageA;
 	
@@ -34,8 +34,15 @@ public class Assessment extends Page_Methods
 	 */
 	public Assessment(WebDriver driver) throws Exception 
 	{
-		PageFactory.initElements(driver, this);
-		this.wait = new WebDriverWait(driver, 30);
+		super(driver);
+	}
+	
+	/**
+	 * Changes the assessment language to French.
+	 */
+	public void selectFrench()
+	{
+		new Select(languageDropDown).selectByValue("2");
 	}
 	
 	/**
@@ -67,6 +74,7 @@ public class Assessment extends Page_Methods
 		catch (Exception exc)
 		{
 			exc.printStackTrace();
+			throw exc;
 		}
 	}
 	
@@ -89,6 +97,7 @@ public class Assessment extends Page_Methods
 		catch (Exception exc) 
 		{
 			exc.printStackTrace();
+			throw exc;
 		}
 	}
 }

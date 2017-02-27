@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import page_objects.AbstractPageObject;
+
 public class Assessment extends AbstractPageObject
 {
 	@FindBy(id = "btnAssessment")

@@ -22,8 +22,8 @@ public class DB_Reset extends AbstractPageObject
 	}
 	
 	/**
-	 * Deletes and creates six new Persona accounts.
-	 * Script adds 1-6 for each Persona account. 
+	 * Deletes and creates six accounts.
+	 * Script adds 1-6 for each type of account.
 	 *
 	 * @param email		the mailbox for the accounts to be reset
 	 * @param endEmail	the domain name for the accounts to be reset
@@ -49,8 +49,8 @@ public class DB_Reset extends AbstractPageObject
 	}
 	
 	/**
-	 * Deletes and creates six Persona accounts without site onboarding.
-	 * Script adds 1-6 for each Persona account. 
+	 * Deletes and creates six accounts without site onboarding.
+	 * Script adds 1-6 for each type of account. 
 	 *
 	 * @param email		the mailbox for the accounts to be reset
 	 * @param endEmail	the domain name for the accounts to be reset

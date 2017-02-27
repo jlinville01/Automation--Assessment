@@ -23,5 +23,6 @@ public class App
 	
 	public Assessment assessment() throws Exception { return new Assessment(driver); }
 	public Login login() throws Exception { return new Login(driver, props); }
-	public MyResources myResources() throws Exception { return new MyResources(driver); }
+	public AssetPage assetPage() throws Exception { return new AssetPage(driver); }
+	public TestPage testPage() throws Exception { return new TestPage(driver); }
 }

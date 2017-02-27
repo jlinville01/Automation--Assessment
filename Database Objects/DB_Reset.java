@@ -5,12 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import page_objects.StandOut;
+import page_objects.AbstractPageObject;
 
-public class DB_Reset extends StandOut
+public class DB_Reset extends AbstractPageObject
 {
 	private Statement stmt;
 	private ResultSet result = null;
@@ -18,21 +16,9 @@ public class DB_Reset extends StandOut
 	private ResultSet cA = null;
 	private ResultSet aR = null;
 	
-	public void runTest() throws Exception {};
-	public void tearDown() throws Exception {};
-	
-	/**
-	 * Instantiates the DB_Reset page object.
-	 * 
-	 * @param driver	the driver for this class.
-	 * @param connection	the db connection for this class.
-	 * @throws Exception
-	 */
 	public DB_Reset(WebDriver driver, java.sql.Connection connection) throws Exception 
 	{
-		PageFactory.initElements(driver, this);
-		this.wait = new WebDriverWait(driver, 30);
-		this.con = connection;
+		super(driver, connection);
 	}
 	
 	/**
@@ -44,15 +30,16 @@ public class DB_Reset extends StandOut
 	 * @param clientID	the client id for the account to be reset
 	 * @throws SQLException 
 	 */
-	public void resetPersona(String email, String endEmail, String clientID) throws SQLException
+	public void resetAccount(String email, String endEmail, String clientID) throws SQLException
 	{
 		try
 		{
 			stmt = con.createStatement();
-			String runReset = "CALL strengthaccelerator.Proc_ResetPersonaAccounts('" + email + "', '" + endEmail + "', '" + clientID + "');";
+			String runReset = "CALL Proc_ResetPersonaAccounts('" + email + "', '" + endEmail + "', '" + clientID + "');";
 			result = stmt.executeQuery(runReset);
-			this.con.commit();
+			stmt.close();
 			result.close();
+			this.con.commit();
 		}
 		catch (Exception exc)
 		{
@@ -69,15 +56,15 @@ public class DB_Reset extends StandOut
 	 * @param endEmail	the domain name for the accounts to be reset
 	 * @param clientID	the client id for the account to be reset
 	 */
-	public void resetPersonaNoOnboarding(String email, String endEmail, String clientID) throws SQLException
+	public void resetAccountNoOnboarding(String email, String endEmail, String clientID) throws SQLException
 	{
 		try
 		{
 			stmt = con.createStatement();
-			String runReset = "CALL strengthaccelerator.Proc_ResetPersonaAccountsWithoutOnBoarding('" + email + "', '" + endEmail + "', '" + clientID + "');";
+			String runReset = "CALL Proc_ResetPersonaAccountsWithoutOnBoarding('" + email + "', '" + endEmail + "', '" + clientID + "');";
 			result = stmt.executeQuery(runReset);
-			this.con.commit();
 			result.close();
+			this.con.commit();
 		}
 		catch (Exception exc)
 		{
@@ -97,16 +84,16 @@ public class DB_Reset extends StandOut
 		try
 		{
 			stmt = con.createStatement();
-			String deleteAccount = "CALL `strengthaccelerator`.`Proc_DeleteAccount`('" + email + "');";
+			String deleteAccount = "CALL Proc_DeleteAccount('" + email + "');";
 			dA = stmt.executeQuery(deleteAccount);
 			this.con.commit();
 			dA.close();
-			String createAccount = "CALL `strengthaccelerator`.`Proc_CreateTestAccount`('persona (test)', 'uno (test)', '"
+			String createAccount = "CALL Proc_CreateTestAccount('persona (test)', 'uno (test)', '"
 					+ email + "', 'superman', '" + clientID + "', null, null, null, 2);";
 			cA = stmt.executeQuery(createAccount);
 			this.con.commit();
 			cA.close();
-			String assignRole = "CALL `strengthaccelerator`.`Proc_AssignRoleToPerson`('" + email + "', 1);";
+			String assignRole = "CALL Proc_AssignRoleToPerson('" + email + "', 1);";
 			aR = stmt.executeQuery(assignRole);
 			this.con.commit();
 			aR.close();
@@ -130,7 +117,7 @@ public class DB_Reset extends StandOut
 		try
 		{
 			stmt = con.createStatement();
-			String deleteAccount = "CALL `strengthaccelerator`.`Proc_DeleteAccount`('" + email + "');";
+			String deleteAccount = "CALL Proc_DeleteAccount('" + email + "');";
 			dA = stmt.executeQuery(deleteAccount);
 			this.con.commit();
 			dA.close();

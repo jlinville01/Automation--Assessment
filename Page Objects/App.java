@@ -9,7 +9,7 @@ public class App
 	private java.sql.Connection con;
 	private java.util.Properties props;
 	
-	public StandOut(WebDriver driver, java.sql.Connection con, java.util.Properties props)
+	public App(WebDriver driver, java.sql.Connection con, java.util.Properties props)
 	{
 		PageFactory.initElements(driver, this);
 		this.driver = driver;

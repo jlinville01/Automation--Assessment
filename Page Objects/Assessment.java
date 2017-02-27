@@ -37,9 +37,6 @@ public class Assessment extends AbstractPageObject
 		super(driver);
 	}
 	
-	/**
-	 * Changes the assessment language to French.
-	 */
 	public void selectFrench()
 	{
 		new Select(languageDropDown).selectByValue("2");

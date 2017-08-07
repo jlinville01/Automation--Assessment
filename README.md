@@ -1,7 +1,7 @@
 # Automation--Assessment
 This is an example that tests a new user performing an assessment.
 
-!(http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/images/streams-endpoints.png)
+![This is grants](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/images/streams-endpoints.png)
 
 /**
   An example of using *images* to display a web image
